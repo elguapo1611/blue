@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Blue::VERSION
   spec.authors       = ["Josh Sharpe"]
   spec.email         = ["josh.m.sharpe@gmail.com"]
-  spec.description   = %q{BLUE}
-  spec.summary       = %q{BLUE}
+  spec.description   = %q{A deployment framework for rails apps}
+  spec.summary       = %q{Helps manage all aspects of your cloud infrastructure. Install services, deploy code, restart processes, monitor, etc...}
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -21,3 +21,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
 end
+
