@@ -13,6 +13,10 @@ Add this line to your application's Gemfile:
       gem 'blue'
     end
 
+Run Bundle:
+
+    $ bundle
+
 And then execute which will move basic config files into place.
 
     $ rake blue:setup
