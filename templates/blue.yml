@@ -1,0 +1,10 @@
+application: APPLICATION_NAME
+repository: REPOSITORY
+user: REMOTE_USERNAME
+scm: git
+
+keep_releases: 5
+
+local_config:
+  - config/database.yml
+

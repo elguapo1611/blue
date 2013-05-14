@@ -1,5 +1,6 @@
 require "blue/version"
+require 'blue/railtie' if defined?(Rails)
 
 module Blue
-  # Your code goes here...
 end
+
