@@ -1,20 +1,21 @@
 # Blue
 
-TODO: Write a gem description
+Blue helps you manage your Ruby on Rails deployment.
+
+* Deploy new code
+* Install/Update/Restart services
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'blue'
+    group :deployment do
+      gem 'blue'
+    end
 
-And then execute:
+And then execute which will move basic config files into place.
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install blue
+    $ rake blue:setup
 
 ## Usage
 
@@ -27,3 +28,4 @@ TODO: Write usage instructions here
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
