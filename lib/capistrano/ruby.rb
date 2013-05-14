@@ -30,9 +30,7 @@ module Blue
   end
 end
 
-puts "meh"
 if Capistrano::Configuration.instance
-puts "yay"
   Blue::RubyInstall.load(Capistrano::Configuration.instance)
 end
 
