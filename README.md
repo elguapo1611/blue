@@ -17,7 +17,7 @@ Run Bundle:
 
     $ bundle
 
-Then run the following to move config templates into place inside your application:
+Then run the following to move a basic set of configs into place.
 
     $ rake blue:setup
 
