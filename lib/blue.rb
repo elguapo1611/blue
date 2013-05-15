@@ -54,16 +54,18 @@ module Blue
   end
 end
 
-Blue.load_config!
+if File.exists?(Blue::BLUE_CONFIG)
+  Blue.load_config! 
 
-require 'capistrano/setup'
-require 'capistrano/deploy'
+  require 'capistrano/setup'
+  require 'capistrano/deploy'
 
-require 'blue/plugins'
-require 'blue/abstract_manifest'
-require 'blue/box'
+  require 'blue/plugins'
+  require 'blue/abstract_manifest'
+  require 'blue/box'
 
-Blue.load_boxes!
+  Blue.load_boxes!
+end
 
 require "capistrano/integration"
 
