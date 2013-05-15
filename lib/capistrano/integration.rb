@@ -5,7 +5,7 @@ module Blue
       capistrano_config.load do
 
         set :ruby_version, Blue.config.ruby.try(:version) || '1.9.3'
-        set :ruby_patch, Blue.config.ruby.try(:patch) || '392'
+        set :ruby_patch, Blue.config.ruby.try(:patch) || '492'
 
         set :application, Blue.config.application
         set :repository,  Blue.config.repository
