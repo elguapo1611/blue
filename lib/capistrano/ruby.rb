@@ -21,7 +21,7 @@ module Blue
                 "sudo make install"
               ].join(' && ')
 
-              run "test #{fetch(:ruby_version)}p#{fetch(:ruby_patch)} = $(ruby --version | awk '{print $2}') || (#{cmd})"
+              run "test -x /usr/bin/ruby && test #{fetch(:ruby_version)}p#{fetch(:ruby_patch)} = $(ruby --version | awk '{print $2}') || (#{cmd})"
             end
           end
         end
