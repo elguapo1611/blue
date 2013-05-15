@@ -18,7 +18,7 @@ module Blue
 
               # Capistrano isn't smart enough to set this up correctly
               path = "/u/apps/#{Blue.config.name}"
-              sudo "mkdir #{path}"
+              sudo "mkdir -p #{path}"
               sudo "chown #{Blue.config.user} #{path}"
             end
           end
