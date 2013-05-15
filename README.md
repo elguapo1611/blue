@@ -10,7 +10,7 @@ Blue helps you manage your Ruby on Rails deployment.
 Add this line to your application's Gemfile:
 
     group :development, :deployment do
-      gem 'blue'
+      gem 'blue', :git => 'git@github.com:crankharder/blue.git'
     end
 
 Run Bundle:
