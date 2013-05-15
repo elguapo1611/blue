@@ -7,8 +7,7 @@ module Blue
           desc 'Apply the Blue manifest for this application'
           task :apply_manifest, :except => { :no_release => true } do
             current_host = capture("echo $CAPISTRANO:HOST$").strip.gsub('.', '_')
-            # run "cd #{latest_release} && RAILS_ROOT=#{latest_release} RAILS_ENV=#{Blue.env} sudo bundle exec shadow_puppet #{latest_release}/config/blue/boxes/#{Blue.env}/#{current_host}.rb"
-            puts latest_release
+            run "cd #{latest_release} && RAILS_ROOT=#{latest_release} RAILS_ENV=#{Blue.env} sudo bundle exec shadow_puppet #{latest_release}/config/blue/boxes/#{Blue.env}/#{current_host}.rb"
           end
         end
 
