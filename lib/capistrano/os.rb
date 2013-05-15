@@ -3,7 +3,7 @@ module Blue
     PACKAGES = %w(
       g++ gcc make libc6-dev patch openssl ca-certificates libreadline6 \
       libreadline6-dev curl zlib1g zlib1g-dev libssl-dev libyaml-dev \
-      libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev autoconf libc6-dev \
+      libxml2-dev libxslt1-dev autoconf libc6-dev \
       libgdbm-dev libncurses5-dev automake libtool bison pkg-config libffi-dev
     )
 
