@@ -6,7 +6,7 @@ module Blue
     # Scour loaded gems for matches and require them.
     def self.init
       Gem.loaded_specs.values.map(&:name).select{|n| n.match("blue-")}.each do |plugin|
-        require plugin
+        require plugin.gsub('-','/')
       end
     end
   end
