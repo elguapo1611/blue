@@ -7,7 +7,7 @@ module Blue
           namespace :setup do
             desc "Install required gems"
             task :os do
-              sudo "apt-get install build-essential"
+              sudo "apt-get install -y build-essential"
             end
           end
         end
