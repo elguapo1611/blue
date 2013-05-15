@@ -6,7 +6,7 @@ module Blue
         namespace :blue do
           # This task should be idempotent
           desc "Configures generic dependencies Blue depends on"
-          task :install do
+          task :install, :roles => [:ruby] do
             blue.setup.ruby
             blue.setup.gems
           end

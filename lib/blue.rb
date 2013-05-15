@@ -48,7 +48,7 @@ module Blue
   end
 
   def self.load_boxes!
-    Dir.glob("#{rails_root}/cloud/environments/#{env}/boxes/*.rb").each do |rb|
+    Dir.glob("#{rails_root}/config/blue/boxes/#{env}/*.rb").each do |rb|
       require rb
     end
   end
@@ -60,10 +60,10 @@ require 'capistrano/setup'
 #require 'capistrano/deploy'
 
 require 'blue/plugins'
-# require 'blue/abstract_manifest'
-# require 'blue/box'
+require 'blue/abstract_manifest'
+require 'blue/box'
 
-# Blue.load_boxes!
+Blue.load_boxes!
 
 require "capistrano/integration"
 
