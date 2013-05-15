@@ -1,4 +1,4 @@
-# require 'blue/plugins/ntpd'
+require 'blue/plugins/ntpd'
 # require 'blue/plugins/local_config'
 
 module Blue
