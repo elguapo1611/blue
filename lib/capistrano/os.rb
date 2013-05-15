@@ -1,16 +1,13 @@
 module Blue
-  class Gems
+  class Os
     def self.load(capistrano_config)
       capistrano_config.load do
 
         namespace :blue do
           namespace :setup do
             desc "Install required gems"
-            task :gems do
-              gems = [
-                :bundler
-              ]
-              sudo "gem install #{gems.join(' ')} --no-ri --no-rdoc"
+            task :os do
+              sudo "apt-get install build-essential"
             end
           end
         end
@@ -20,6 +17,6 @@ module Blue
 end
 
 if Capistrano::Configuration.instance
-  Blue::Gems.load(Capistrano::Configuration.instance)
+  Blue::Os.load(Capistrano::Configuration.instance)
 end
 

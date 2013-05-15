@@ -7,6 +7,7 @@ module Blue
           # This task should be idempotent
           desc "Configures generic dependencies Blue depends on"
           task :install, :roles => [:ruby] do
+            blue.setup.os
             blue.setup.ruby
             blue.setup.gems
           end
@@ -21,5 +22,6 @@ if Capistrano::Configuration.instance
   Blue::Setup.load(Capistrano::Configuration.instance)
 end
 
+require 'capistrano/os'
 require 'capistrano/ruby'
 require 'capistrano/gems'
