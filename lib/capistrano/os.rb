@@ -19,6 +19,7 @@ module Blue
               # Capistrano isn't smart enough to set this up correctly
               puts options rescue nil
               puts configuration rescue nil
+              puts application
               path = "/u/apps/#{Blue.config.name}"
               sudo "mkdir -p #{path}"
               sudo "chown #{Blue.config.user} #{path}"
