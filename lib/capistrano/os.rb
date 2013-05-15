@@ -17,7 +17,8 @@ module Blue
               sudo "apt-get install -y #{Blue::Os::PACKAGES.join(' ')}"
 
               # Capistrano isn't smart enough to set this up correctly
-              path = "/u/apps/#{Blue.config.name}"
+              puts application
+              path = "/u/apps/#{application}"
               sudo "mkdir -p #{path}"
               sudo "chown #{user} #{path}"
             end
