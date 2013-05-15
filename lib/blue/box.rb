@@ -4,7 +4,6 @@ module Blue
   class Box < Blue::AbstractManifest
 
     include Blue::Template
-
     include Blue::Ntpd
 
     def self.inherited(klass)

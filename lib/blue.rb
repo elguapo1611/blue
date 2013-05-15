@@ -57,7 +57,7 @@ end
 Blue.load_config!
 
 require 'capistrano/setup'
-#require 'capistrano/deploy'
+require 'capistrano/deploy'
 
 require 'blue/plugins'
 require 'blue/abstract_manifest'
