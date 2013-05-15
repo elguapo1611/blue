@@ -15,6 +15,11 @@ module Blue
             desc "Install required gems"
             task :os do
               sudo "apt-get install -y #{Blue::Os::PACKAGES.join(' ')}"
+
+              # Capistrano isn't smart enough to set this up correctly
+              path = "/u/apps/#{Blue.config.name}"
+              sudo "mkdir #{path}"
+              sudo "chown #{Blue.config.user} #{path}"
             end
           end
         end
