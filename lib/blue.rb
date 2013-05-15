@@ -12,7 +12,8 @@ require 'blue/railtie' if defined?(Rails)
 
 module Blue
   @@config = Hashie::Mash.new({
-    :user => 'rails'
+    :user => 'rails',
+    :group => 'rails'
   })
   @@boxes  = []
   BLUE_CONFIG = 'config/blue.yml'
