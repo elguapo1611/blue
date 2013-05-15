@@ -12,7 +12,7 @@ module Blue
           namespace :setup do
             desc "Install required gems"
             task :os do
-              sudo "apt-get install -y #{Blue::Os::PACKAGES.join(' ')}
+              sudo "apt-get install -y #{Blue::Os::PACKAGES.join(' ')}"
             end
           end
         end
