@@ -18,8 +18,7 @@ module Blue
 
               # Capistrano isn't smart enough to set this up correctly
               path = "/u/apps/#{application}"
-              sudo "mkdir -p #{path}"
-              sudo "chown #{user} #{path}"
+              sudo "chown -R #{user} #{path}"
             end
           end
         end
