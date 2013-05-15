@@ -9,7 +9,7 @@ Blue helps you manage your Ruby on Rails deployment.
 
 Add this line to your application's Gemfile:
 
-    group :deployment do
+    group :development, :deployment do
       gem 'blue'
     end
 
