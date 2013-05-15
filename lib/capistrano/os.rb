@@ -19,6 +19,10 @@ module Blue
               # Capistrano isn't smart enough to set this up correctly
               path = "/u/apps/#{application}"
               sudo "chown -R #{user} #{path}"
+
+              # Grab github's fingerprint
+              # Oh yea, this is dangerous
+              run "ssh -o StrictHostKeyChecking=no git@github.com || true"
             end
           end
         end
