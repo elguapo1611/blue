@@ -68,4 +68,5 @@ if File.exists?(Blue::BLUE_CONFIG)
 end
 
 require "capistrano/integration"
+require 'capistrano/local_config'
 
