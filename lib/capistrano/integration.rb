@@ -10,7 +10,7 @@ module Blue
         set :application, Blue.config.application
         set :repository,  Blue.config.repository
         set :scm, Blue.config.scm || 'git'
-        set :user, Blue.config.user || 'deployer'
+        set :user, Blue.config.user || 'rails'
 
         set :keep_releases, Blue.config.keep_releases || 5
         set :normalize_asset_timestamps, false
