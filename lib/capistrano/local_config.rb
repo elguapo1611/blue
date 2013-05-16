@@ -20,7 +20,7 @@ Uploads local configuration files to the application's shared directory for \
 later symlinking (if necessary). Called if local_config is set.
             DESC
             task :upload do
-              fetch(:local_config).each do |file|
+              Blue.config.local_config.each do |file|
                 filename = File.basename(file)
                 path = File.dirname(file)
                 if File.exist?(file)
@@ -34,7 +34,7 @@ later symlinking (if necessary). Called if local_config is set.
 Symlinks uploaded local configurations into the release directory.
             DESC
             task :symlink do
-              fetch(:local_config).each do |file|
+              Blue.config.local_config.each do |file|
                 filename = File.basename(file)
                 path = File.dirname(file)
                 run "mkdir -p '#{latest_release}/#{path}'" unless path.empty?
