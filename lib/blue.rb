@@ -21,15 +21,15 @@ module Blue
   end
 
   def self.rails_root
-    @@rails_root ||= `pwd`.strip #File.join(release_dir.split('/')[0..3] + ['current'])
+    @@rails_root ||= `pwd`.strip #File.join(current_release_dir.split('/')[0..3] + ['current'])
   end
 
   def self.rails_current
-    @@rails_current ||= File.join(release_dir.split('/')[0..3] + ['current'])
+    @@rails_current ||= File.join(current_release_dir.split('/')[0..3] + ['current'])
   end
 
-  def self.release_dir
-    @@release_dir ||= `pwd`.strip
+  def self.current_release_dir
+    @@current_release_dir ||= `pwd`.strip
   end
 
   @@boxes  = []
@@ -50,6 +50,7 @@ end
 
 if File.exists?(Blue::BLUE_CONFIG)
   require 'blue/config'
+  require 'blue/database_config'
 
   require 'capistrano/setup'
   require 'capistrano/deploy'

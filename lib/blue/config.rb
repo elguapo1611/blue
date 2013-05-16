@@ -6,6 +6,11 @@ module Blue
         @@config = Hashie::Mash.new
 
         def self.load_config!(new_config = {})
+          puts "load_config is deprecated"
+          @@config.deep_merge!(new_config)
+        end
+
+        def self.configure(new_config = {})
           @@config.deep_merge!(new_config)
         end
 
@@ -17,7 +22,7 @@ module Blue
           @@config
         end
 
-        Blue.load_config!({
+        Blue.configure({
           :user  => 'rails',
           :group => 'rails',
           :scm   => 'git'
