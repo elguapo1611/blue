@@ -7,7 +7,7 @@ module Blue
           namespace :precompile do
             desc "Precompile assets"
             task :assets do
-              run "cd #{Blue.current_release_dir} && RAILS_ENV=#{Blue.env} RAILS_GROUPS=assets bundle exec rake assets:precompile"
+              run "cd #{release_path} && RAILS_ENV=#{Blue.env} RAILS_GROUPS=assets bundle exec rake assets:precompile"
             end
           end
         end
