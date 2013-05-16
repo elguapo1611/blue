@@ -18,7 +18,7 @@ module Blue
         set :shared_children, %w(system log pids tmp)
 
         Blue.boxes.each do |box|
-          server box.hostname, *box.roles
+          server box.hostname, *box.roles, :primary => true # primary is a hack, shouldn't be here
         end
 
         namespace :blue do
