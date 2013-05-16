@@ -54,6 +54,7 @@ if File.exists?(Blue::BLUE_CONFIG)
 
   require 'capistrano/setup'
   require 'capistrano/deploy'
+  require 'capistrano/rails'
 
   require 'blue/plugins'
   require 'blue/abstract_manifest'
