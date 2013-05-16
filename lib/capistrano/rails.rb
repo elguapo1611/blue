@@ -7,7 +7,7 @@ module Blue
           namespace :db do
             desc "Install required gems"
             task :migrate do
-              rake 'db:migrate'
+              run "cd #{Blue.current_release_dir} && RAILS_ENV=#{Bundle.env} bundle exec rake db:migrate"
             end
           end
         end
