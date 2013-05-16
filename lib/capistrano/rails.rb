@@ -3,16 +3,17 @@ module Blue
     def self.load(capistrano_config)
       capistrano_config.load do
 
-        # namespace :blue do
-        #   namespace :db do
-        #     desc "Install required gems"
-        #     task :migrate do
-        #       run "cd #{Blue.current_release_dir} && RAILS_ENV=#{Bundle.env} bundle exec rake db:migrate"
-        #     end
-        #   end
-        # end
+        namespace :blue do
+          namespace :precompile do
+            desc "Precompile assets"
+            task :assets do
+              run "cd #{Blue.current_release_dir} && RAILS_ENV=#{Blue.env} RAILS_GROUPS=assets bundle exec rake assets:precompile"
+            end
+          end
+        end
 
         after 'blue:apply_manifest', 'deploy:migrate'
+        after 'deploy:migrate', 'blue:precompile:assets'
       end
     end
   end
