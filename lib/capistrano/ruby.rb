@@ -1,5 +1,6 @@
 module Blue
   class RubyInstall
+
     def self.load(capistrano_config)
       capistrano_config.load do
 
@@ -7,7 +8,7 @@ module Blue
           namespace :setup do
             desc "Install Ruby 1.9.3"
             task :ruby do
-              version = "ruby-#{fetch(:ruby_version)}-p#{fetch(:ruby_patch)}"
+              version = "ruby-#{Blue.config.ruby.major_version}-p#{Blue.config.ruby.minor_version}"
 
               cmd = [
                 'sudo apt-get install autoconf libyaml-dev -y || true',
@@ -21,7 +22,7 @@ module Blue
                 "sudo make install"
               ].join(' && ')
 
-              run "test -x /usr/bin/ruby && test #{fetch(:ruby_version)}p#{fetch(:ruby_patch)} = $(ruby --version | awk '{print $2}') || (#{cmd})"
+              run "test -x /usr/bin/ruby && test #{Blue.config.ruby.major_version}p#{Blue.config.ruby.minor_version} = $(ruby --version | awk '{print $2}') || (#{cmd})"
             end
           end
         end
@@ -29,6 +30,13 @@ module Blue
     end
   end
 end
+
+Blue.load_config!({
+  :ruby  => {
+    :major_version => '1.9.3',
+    :minor_version => '429'
+  }
+})
 
 if Capistrano::Configuration.instance
   Blue::RubyInstall.load(Capistrano::Configuration.instance)

@@ -2,10 +2,16 @@ module Blue
   module LocalConfig
     module CapistranoIntegration
 
+      def self.included(klass)
+        Blue.load_config!({
+          :local_config => []
+        })
+      end
+
       def self.load(capistrano_config)
         capistrano_config.load do
 
-          set :local_config, Blue.config.local_config || []
+          set :local_config, Blue.config.local_config
 
           namespace :local_config do
 

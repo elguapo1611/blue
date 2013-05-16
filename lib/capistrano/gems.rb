@@ -7,10 +7,7 @@ module Blue
           namespace :setup do
             desc "Install required gems"
             task :gems do
-              gems = [
-                :bundler
-              ]
-              sudo "gem install #{gems.join(' ')} --no-ri --no-rdoc"
+              sudo "gem install gems --no-ri --no-rdoc"
             end
           end
         end

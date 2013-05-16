@@ -25,3 +25,4 @@ end
 require 'capistrano/os'
 require 'capistrano/ruby'
 require 'capistrano/gems'
+

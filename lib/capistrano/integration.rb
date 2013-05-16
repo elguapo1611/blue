@@ -4,12 +4,12 @@ module Blue
     def self.load(capistrano_config)
       capistrano_config.load do
 
-        set :ruby_version, Blue.config.ruby.try(:version) || '1.9.3'
-        set :ruby_patch, Blue.config.ruby.try(:patch) || '429'
+        set :ruby_version, Blue.config.ruby.major_version
+        set :ruby_patch, Blue.config.ruby.minor_version
 
         set :application, Blue.config.application
         set :repository,  Blue.config.repository
-        set :scm, Blue.config.scm || 'git'
+        set :scm, Blue.config.scm
         set :user, Blue.config.user
 
         set :keep_releases, Blue.config.keep_releases || 5

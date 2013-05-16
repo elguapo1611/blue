@@ -7,20 +7,14 @@ require 'shadow_puppet'
 
 require 'blue/version'
 require 'blue/deep_merge'
+require 'blue/config'
 
 require 'blue/railtie' if defined?(Rails)
 
 module Blue
-  @@config = Hashie::Mash.new({
-    :user => 'rails',
-    :group => 'rails'
-  })
-  @@boxes  = []
   BLUE_CONFIG = 'config/blue.yml'
 
-  def self.load_config!
-    @@config.deep_merge!(YAML.load(IO.read(BLUE_CONFIG)))
-  end
+  include Blue::Config
 
   def self.env
     ENV['DEPLOY_ENV']
@@ -38,10 +32,7 @@ module Blue
     @@release_dir ||= `pwd`.strip
   end
 
-  def self.config
-    @@config
-  end
-
+  @@boxes  = []
   def self.register_box(klass)
     @@boxes << klass
   end
@@ -58,7 +49,7 @@ module Blue
 end
 
 if File.exists?(Blue::BLUE_CONFIG)
-  Blue.load_config! 
+  require 'blue/config'
 
   require 'capistrano/setup'
   require 'capistrano/deploy'
@@ -67,9 +58,11 @@ if File.exists?(Blue::BLUE_CONFIG)
   require 'blue/abstract_manifest'
   require 'blue/box'
 
+  require 'capistrano/local_config'
+
+  Blue.load_default_config!
   Blue.load_boxes!
 end
 
 require "capistrano/integration"
-require 'capistrano/local_config'
 
