@@ -12,7 +12,7 @@ module Blue
         #   end
         # end
 
-        after 'blue:apply_manifest', 'deploy:migrations'
+        after 'blue:apply_manifest', 'deploy:migrate'
       end
     end
   end
