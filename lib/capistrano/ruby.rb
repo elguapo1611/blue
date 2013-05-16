@@ -31,7 +31,7 @@ module Blue
   end
 end
 
-Blue.configure!({
+Blue.configure({
   :ruby  => {
     :major_version => '1.9.3',
     :minor_version => '429'
