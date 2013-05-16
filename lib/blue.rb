@@ -32,6 +32,10 @@ module Blue
     @@current_release_dir ||= `pwd`.strip
   end
 
+  def self.shared_path
+    @@shared_path ||= "/u/apps/stocks/shared/"
+  end
+
   @@boxes  = []
   def self.register_box(klass)
     @@boxes << klass
