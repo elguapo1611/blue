@@ -9,8 +9,13 @@ module Blue
             current_host = capture("echo $CAPISTRANO:HOST$").strip.gsub('.', '_')
             run "cd #{latest_release} && RAILS_ROOT=#{latest_release} RAILS_ENV=#{Blue.env} sudo bundle exec shadow_puppet #{latest_release}/config/blue/boxes/#{Blue.env}/#{current_host}.rb"
           end
+
+          task :verify_db do
+            executing "cd #{latest_release} && RAILS_ENV=#{Blue.env} bundle exec rails runner 'ActiveRecord::Base.connection.execute %q!SELECT 1=1!'"
+          end
         end
 
+        after 'deploy:migrate', 'blue:verify_db'
         before 'deploy:create_symlink', 'blue:apply_manifest'
         after "deploy:update", "deploy:cleanup"
       end
