@@ -43,7 +43,7 @@ Symlinks uploaded local configurations into the release directory.
             end
           end
 
-          before 'bundle:install' do
+          before 'blue:apply_manifest' do
             local_config.upload
             local_config.symlink
           end
