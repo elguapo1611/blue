@@ -20,7 +20,8 @@ module Blue
         Blue.configure({
           :user  => 'rails',
           :group => 'rails',
-          :scm   => 'git'
+          :scm   => 'git',
+          :prod_safe_ip_addresses => []
         })
       end
     end
