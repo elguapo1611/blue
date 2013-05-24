@@ -25,7 +25,7 @@ module Blue
     end
 
     def self.import(klass)
-      require klass.underscore
+      require klass.name.underscore
       include klass
     end
   end
