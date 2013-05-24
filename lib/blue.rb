@@ -10,7 +10,6 @@ require 'blue/deep_merge'
 require 'blue/config'
 
 require 'blue/railtie' if defined?(Rails)
-require 'blue/gems'
 
 module Blue
   BLUE_CONFIG = 'config/blue.yml'
@@ -56,6 +55,7 @@ end
 if File.exists?(Blue::BLUE_CONFIG)
   require 'blue/config'
   require 'blue/database_config'
+  require 'blue/gems'
 
   require 'capistrano/setup'
   require 'capistrano/deploy'
