@@ -1,4 +1,5 @@
 require 'blue/template'
+require 'active_support/core_ext'
 
 module Blue
   class Box < Blue::AbstractManifest
@@ -24,9 +25,11 @@ module Blue
       self.class.roles
     end
 
-    def self.import(klass)
+    def self.import(plugin)
+      require "blue/#{plugin}"
+
       require klass.name.underscore
-      include klass
+      self.send(:include, "Blue::#{plugin.to_s.titlecase}".constantize
     end
   end
 end
