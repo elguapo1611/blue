@@ -33,7 +33,7 @@ module Blue
   end
 
   def self.shared_path
-    @@shared_path ||= "/u/apps/stocks/shared/"
+    @@shared_path ||= "/u/apps/#{Blue.config.application}/shared/"
   end
 
   @@boxes  = []
