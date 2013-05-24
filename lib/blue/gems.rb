@@ -1,5 +1,5 @@
 module Blue
-  class Gems
+  module Gems
     @@required_gems = [
       'bundler',
       'shadow_puppet',
