@@ -49,7 +49,7 @@ Symlinks uploaded local configurations into the release directory.
             end
           end
 
-          after 'bundle:install', 'local_config:upload_and_symlink'
+          after 'deploy:update_code', 'local_config:upload_and_symlink'
         end
       end
     end
