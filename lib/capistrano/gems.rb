@@ -1,21 +1,5 @@
 module Blue
-  class Gems
-
-    @@required_gems = [
-      'bundler',
-      'shadow_puppet',
-      'blue',
-      'rake',
-      'builder'
-    ]
-
-    def self.required_gems
-      @@required_gems
-    end
-
-    def self.require(gem)
-      @@required_gems << gem
-    end
+  module Gems
 
     def self.load(capistrano_config)
       capistrano_config.load do

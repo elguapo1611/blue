@@ -1,6 +1,6 @@
 ENV['DEPLOY_ENV'] ||= 'production'
 
-require 'bundler/setup'
+# require 'bundler/setup'
 require 'capistrano'
 require 'hashie'
 require 'shadow_puppet'
@@ -10,6 +10,7 @@ require 'blue/deep_merge'
 require 'blue/config'
 
 require 'blue/railtie' if defined?(Rails)
+require 'blue/gems'
 
 module Blue
   BLUE_CONFIG = 'config/blue.yml'
