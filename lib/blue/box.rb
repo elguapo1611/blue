@@ -23,6 +23,11 @@ module Blue
     def roles
       self.class.roles
     end
+
+    def self.import(klass)
+      require klass.underscore
+      include klass
+    end
   end
 end
 
