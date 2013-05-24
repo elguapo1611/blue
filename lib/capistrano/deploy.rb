@@ -15,7 +15,7 @@ module Blue
           end
         end
 
-        after 'bundle:install', 'blue:apply_manifest'
+        after 'local_config:upload_and_symlink', 'blue:apply_manifest'
         after 'deploy:migrate', 'blue:verify_db'
         after "deploy:update", "deploy:cleanup"
       end
