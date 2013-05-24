@@ -41,12 +41,15 @@ Symlinks uploaded local configurations into the release directory.
                 run "ls #{latest_release}/#{file} 2> /dev/null || ln -nfs #{shared_path}/#{path}/#{filename} #{latest_release}/#{file}"
               end
             end
+
+            desc "Uplaod and symlink"
+            task :upload_and_symlink do
+              upload
+              symlink
+            end
           end
 
-          before 'blue:apply_manifest' do
-            local_config.upload
-            local_config.symlink
-          end
+          after 'deploy:update_code', 'local_config:upload_and_symlink'
         end
       end
     end
