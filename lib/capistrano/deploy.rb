@@ -16,7 +16,7 @@ module Blue
         end
 
         after 'deploy:migrate', 'blue:verify_db'
-        before 'bundle:install', 'blue:apply_manifest'
+        # before 'bundle:install', 'blue:apply_manifest'
         after "deploy:update", "deploy:cleanup"
       end
     end
