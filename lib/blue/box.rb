@@ -29,7 +29,7 @@ module Blue
       require "blue/#{plugin}"
 
       require klass.name.underscore
-      self.send(:include, "Blue::#{plugin.to_s.titlecase}".constantize
+      self.send :include, "Blue::#{plugin.to_s.titlecase}".constantize
     end
   end
 end
