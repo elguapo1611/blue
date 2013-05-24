@@ -7,7 +7,7 @@ module Blue
           namespace :setup do
             desc "Install required gems"
             task :gems do
-              sudo "gem install bundler --no-ri --no-rdoc"
+              sudo "gem install bundler shadow_puppet --no-ri --no-rdoc"
             end
           end
         end
