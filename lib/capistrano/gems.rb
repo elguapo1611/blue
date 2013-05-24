@@ -1,5 +1,21 @@
 module Blue
   class Gems
+
+    @@required_gems = [
+      'bundler',
+      'shadow_puppet',
+      'blue',
+      'rake'
+    ]
+
+    def self.required_gems
+      @@required_gems
+    end
+
+    def self.require(gem)
+      @@required_gems << gem
+    end
+
     def self.load(capistrano_config)
       capistrano_config.load do
 
@@ -7,7 +23,7 @@ module Blue
           namespace :setup do
             desc "Install required gems"
             task :gems do
-              sudo "gem install bundler shadow_puppet blue blue-postgresql --no-ri --no-rdoc"
+              sudo "gem install #{Blue::Gems.required_gems.join(' ')} --no-ri --no-rdoc"
             end
           end
         end
