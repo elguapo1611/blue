@@ -5,7 +5,8 @@ module Blue
       'bundler',
       'shadow_puppet',
       'blue',
-      'rake'
+      'rake',
+      'builder'
     ]
 
     def self.required_gems
