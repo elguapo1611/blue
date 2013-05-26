@@ -28,7 +28,7 @@ module Blue
     def self.import(plugin)
       require "blue/#{plugin}"
 
-      self.send :include, "Blue::#{plugin.to_s.titlecase}".constantize
+      self.send :include, "Blue::#{plugin.to_s.split('/').map(&:titlecase).join('::')}"
     end
   end
 end
