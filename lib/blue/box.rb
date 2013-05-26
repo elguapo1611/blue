@@ -28,8 +28,8 @@ module Blue
     def self.import(plugin)
       require "blue/#{plugin}"
 
-      module_name = "Blue::#{plugin.to_s.split('/').map(&:titlecase).join('::')}"
-      puts "requiring #{module_name}"
+      module_name = "Blue::#{plugin.to_s.split('/').map(&:titlecase).join('::')}".classify
+      puts "include #{module_name}"
       self.send :include, module_name #"Blue::#{plugin.to_s.split('/').map(&:titlecase).join('::')}"
     end
   end
