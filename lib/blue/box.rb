@@ -29,8 +29,8 @@ module Blue
       require "blue/#{plugin}"
 
       module_name = "Blue::#{plugin.to_s.split('/').map(&:titlecase).join('::')}".classify
-      puts "include #{module_name}"
-      self.send :include, module_name #"Blue::#{plugin.to_s.split('/').map(&:titlecase).join('::')}"
+      puts "including #{module_name}"
+      self.send :include, module_name
     end
   end
 end
