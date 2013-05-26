@@ -28,7 +28,9 @@ module Blue
     def self.import(plugin)
       require "blue/#{plugin}"
 
-      self.send :include, "Blue::#{plugin.to_s.split('/').map(&:titlecase).join('::')}"
+      module_name = "Blue::#{plugin.to_s.split('/').map(&:titlecase).join('::')}"
+      puts "requiring #{module_name}"
+      self.send :include, module_name #"Blue::#{plugin.to_s.split('/').map(&:titlecase).join('::')}"
     end
   end
 end
