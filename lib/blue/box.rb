@@ -28,7 +28,7 @@ module Blue
     def self.import(plugin)
       require "blue/#{plugin}"
 
-      module_name = "Blue::#{plugin.to_s.split('/').map(&:titlecase).join('::')}".classify
+      module_name = "Blue::#{plugin.to_s.split('/').map(&:titlecase).join('::')}".constantize
       puts "including #{module_name}"
       self.send :include, module_name
     end
