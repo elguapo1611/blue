@@ -10,6 +10,9 @@ module Blue
     def self.inherited(klass)
       Blue.register_box(klass)
       klass.add_role(:ruby)
+      Blue.configure({
+        :ip_address => klass.const_get(:IP_ADDRESS)
+      })
     end
 
     def self.add_role(role)
