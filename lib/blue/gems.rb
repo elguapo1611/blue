@@ -1,5 +1,6 @@
 module Blue
   module Gems
+
     @@required_gems = [
       'bundler',
       'shadow_puppet',
