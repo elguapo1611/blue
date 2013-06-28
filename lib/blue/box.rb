@@ -6,6 +6,7 @@ module Blue
 
     include Blue::Template
     include Blue::Ntpd
+    include Blue::Apt
 
     def self.inherited(klass)
       Blue.register_box(klass)
