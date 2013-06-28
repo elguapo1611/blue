@@ -1,4 +1,5 @@
 require 'blue/plugins/ntpd'
+require 'blue/plugins/apt'
 
 module Blue
   module Plugins
