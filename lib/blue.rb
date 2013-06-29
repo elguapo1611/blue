@@ -36,6 +36,14 @@ module Blue
     @@shared_path ||= "/u/apps/#{Blue.config.application}/shared/"
   end
 
+  def self.logs_path
+    @@logs_path ||= shared_path += "logs/"
+  end
+
+  def self.pids_path
+    @@pids_path ||= shared_path += "pids/"
+  end
+
   @@boxes  = []
   def self.register_box(klass)
     @@boxes << klass
