@@ -8,7 +8,7 @@ module Blue
           namespace :setup do
             desc "Install required gems"
             task :gems do
-              sudo "gem install #{Blue::Gems.required_gems.join(' ')} --no-ri --no-rdoc"
+              # sudo "gem install #{Blue::Gems.required_gems.join(' ')} --no-ri --no-rdoc"
             end
           end
         end
