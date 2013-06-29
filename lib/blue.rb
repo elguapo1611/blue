@@ -36,8 +36,8 @@ module Blue
     @@shared_path ||= "/u/apps/#{Blue.config.application}/shared/"
   end
 
-  def self.logs_path
-    @@logs_path ||= shared_path + "logs/"
+  def self.log_path
+    @@log_path ||= shared_path + "log/"
   end
 
   def self.pids_path
