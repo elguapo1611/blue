@@ -8,7 +8,7 @@ module Blue
           task :apply_manifest, :except => { :no_release => true } do
             current_host = capture("echo $CAPISTRANO:HOST$").strip.gsub('.', '_')
             run "sudo su - -c 'cd #{latest_release} && RAILS_ROOT=#{latest_release} RAILS_ENV=#{Blue.env} shadow_puppet #{latest_release}/config/blue/boxes/#{Blue.env}/#{current_host}.rb'"
-            run "sudo su - -c 'pwd'"
+            run "#{sudo} pwd "
           end
 
           task :verify_db do
