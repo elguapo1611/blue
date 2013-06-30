@@ -54,7 +54,7 @@ module Blue
   end
 
   def self.load_boxes!
-    Dir.glob("#{rails_root}/config/blue/boxes/#{env}/*.rb").each do |rb|
+    Dir.glob("#{rails_root}/config/blue/#{env}/*.rb").each do |rb|
       require rb
     end
   end
