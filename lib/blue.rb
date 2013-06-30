@@ -44,19 +44,8 @@ module Blue
     @@pids_path ||= shared_path + "pids/"
   end
 
-  @@boxes  = []
-  def self.register_box(klass)
-    @@boxes << klass
-  end
-
-  def self.boxes
-    @@boxes
-  end
-
-  def self.load_boxes!
-    Dir.glob("#{rails_root}/config/blue/#{env}/*.rb").each do |rb|
-      require rb
-    end
+  def self.gem_path
+    @gem_path ||= Bundler.load.specs.detect{|s| s.name == 'blue' }.try(:full_gem_path)
   end
 end
 
@@ -72,11 +61,12 @@ if File.exists?(Blue::BLUE_CONFIG)
   require 'blue/plugins'
   require 'blue/abstract_manifest'
   require 'blue/box'
+  require 'blue/initializer'
 
   require 'capistrano/local_config'
 
   Blue.load_app_config!
-  Blue.load_boxes!
+  Blue::Box.load!
 end
 
 require "capistrano/integration"

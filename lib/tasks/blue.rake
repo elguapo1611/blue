@@ -1,21 +1,19 @@
 namespace :blue do
   desc "Move a basic set of configs into place"
   task :setup do
-    puts "Copying configs into place inside your application..."
+    puts "Copying configs into place inside your application"
     puts ""
 
-    gem_path = Bundler.load.specs.detect{|s| s.name == 'blue' }.try(:full_gem_path)
-
     puts "cp config/blue.yml"
-    FileUtils.cp gem_path + "/templates/blue.yml", "config/blue.yml"
+    FileUtils.cp Blue.gem_path + "/templates/blue.yml", "config/blue.yml"
     puts "cp Capfile"
-    FileUtils.cp gem_path + "/templates/Capfile", "Capfile"
+    FileUtils.cp Blue.gem_path + "/templates/Capfile", "Capfile"
     puts "cp config/deploy.rb"
-    FileUtils.cp gem_path + "/templates/deploy.rb", "config/deploy.rb"
+    FileUtils.cp Blue.gem_path + "/templates/deploy.rb", "config/deploy.rb"
 
     FileUtils.mkdir_p("config/blue/production")
     puts "cp config/blue/production/some_hostname_com.rb"
-    FileUtils.cp gem_path + "/templates/box.rb", "config/blue/production/some_hostname_com.rb"
+    FileUtils.cp Blue.gem_path + "/templates/box.rb", "config/blue/production/some_hostname_com.rb"
 
     puts ""
     puts "###############################################################"
@@ -23,6 +21,17 @@ namespace :blue do
     puts "##  Now go read config/blue/production/some_hostname_com.rb  ##"
     puts "###############################################################"
     puts ""
+  end
+
+  desc "Verify Blue config"
+  task :verify => :environment do
+    Blue::Config.verify!
+  end
+
+  desc "Creates super and application users, copies ssh and sudoers configs into place."
+  task :init do
+    Rake::Task["blue:verify"].invoke
+    Blue::Initializer.run!
   end
 end
 

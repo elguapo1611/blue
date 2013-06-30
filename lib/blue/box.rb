@@ -9,8 +9,23 @@ module Blue
     include Blue::Apt
 
     def self.inherited(klass)
-      Blue.register_box(klass)
+      Blue::Box.register(klass)
       klass.add_role(:ruby)
+    end
+
+    def self.register(klass)
+      boxes << klass
+      true
+    end
+
+    def self.boxes
+      @@boxes ||= Set.new
+    end
+
+    def self.load!
+      Dir.glob("#{Blue.rails_root}/config/blue/#{Blue.env}/*.rb").each do |rb|
+        require rb
+      end
     end
 
     def self.add_role(role)
@@ -24,6 +39,18 @@ module Blue
 
     def roles
       self.class.roles
+    end
+
+    def self.ip
+      self.const_get(:IP_ADDRESS)
+    end
+
+    def self.user_ip
+      [Blue.config.user, ip].join('@')
+    end
+
+    def self.sudoer_ip
+      [Blue.config.sudoer, ip].join('@')
     end
 
     def self.import(plugin)
