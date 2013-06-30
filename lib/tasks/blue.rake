@@ -13,15 +13,15 @@ namespace :blue do
     puts "cp config/deploy.rb"
     FileUtils.cp gem_path + "/templates/deploy.rb", "config/deploy.rb"
 
-    FileUtils.mkdir_p("config/blue/boxes/production")
-    puts "cp config/blue/boxes/production/some_hostname_com.rb"
-    FileUtils.cp gem_path + "/templates/box.rb", "config/blue/boxes/production/some_hostname_com.rb"
+    FileUtils.mkdir_p("config/blue/production")
+    puts "cp config/blue/production/some_hostname_com.rb"
+    FileUtils.cp gem_path + "/templates/box.rb", "config/blue/production/some_hostname_com.rb"
 
     puts ""
-    puts "#####################################################################"
-    puts "##  Great! All done adding some configs.                           ##"
-    puts "##  Now go read config/blue/boxes/production/some_hostname_com.rb  ##"
-    puts "#####################################################################"
+    puts "###############################################################"
+    puts "##  Great! All done adding some configs.                     ##"
+    puts "##  Now go read config/blue/production/some_hostname_com.rb  ##"
+    puts "###############################################################"
     puts ""
   end
 end
