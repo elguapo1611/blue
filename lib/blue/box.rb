@@ -57,6 +57,6 @@ module Blue
   end
 end
 
-Blue::Box.import('ntpd')
-Blue::Box.import('apt')
+Blue::Box.import('plugins/ntpd')
+Blue::Box.import('plugins/apt')
 
