@@ -17,6 +17,7 @@ module Blue
             task :os do
 
               parent.upload(Blue.gem_path + "/templates/sources.list", "/tmp/sources.list")
+
               run "sudo mv /tmp/sources.list /etc/apt/sources.list"
               run "sudo apt-get update"
               run "sudo apt-get -y dist-upgrade"
