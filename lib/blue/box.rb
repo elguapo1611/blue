@@ -5,8 +5,6 @@ module Blue
   class Box < Blue::AbstractManifest
 
     include Blue::Template
-    include Blue::Ntpd
-    include Blue::Apt
 
     def self.inherited(klass)
       Blue::Box.register(klass)
@@ -58,4 +56,7 @@ module Blue
     end
   end
 end
+
+Blue::Box.import('ntpd')
+Blue::Box.import('apt')
 
