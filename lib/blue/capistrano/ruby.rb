@@ -31,13 +31,6 @@ module Blue
   end
 end
 
-Blue.configure({
-  :ruby  => {
-    :major_version => '1.9.3',
-    :minor_version => '448'
-  }
-})
-
 if Capistrano::Configuration.instance
   Blue::RubyInstall.load(Capistrano::Configuration.instance)
 end

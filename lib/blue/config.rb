@@ -7,7 +7,11 @@ module Blue
         :user  => 'rails',
         :group => 'rails',
         :scm   => 'git',
-        :prod_safe_ip_addresses => []
+        :prod_safe_ip_addresses => [],
+        :ruby  => {
+          :major_version => '1.9.3',
+          :minor_version => '448'
+        }
       })
     end
 

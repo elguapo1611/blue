@@ -1,13 +1,11 @@
 ENV['DEPLOY_ENV'] ||= 'production'
 
-# require 'bundler/setup'
 require 'capistrano'
 require 'hashie'
 require 'shadow_puppet'
 
 require 'blue/version'
 require 'blue/deep_merge'
-require 'blue/config'
 
 require 'blue/railtie' if defined?(Rails)
 
