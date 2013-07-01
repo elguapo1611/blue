@@ -27,6 +27,10 @@ module Blue
             run "echo $(hostname)"
           end
 
+          task :reboot, :roles => :os do
+            run "sudo reboot"
+          end
+
           desc "Display Blue Configuration"
           task :config do
             require 'pp'

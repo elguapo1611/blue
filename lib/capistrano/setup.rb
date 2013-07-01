@@ -11,6 +11,7 @@ module Blue
             blue.setup.github
             blue.setup.ruby
             blue.setup.gems
+            blue.reboot
           end
         end
         after 'deploy:setup', 'blue:install'
