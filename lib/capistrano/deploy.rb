@@ -6,8 +6,9 @@ module Blue
         namespace :blue do
           desc 'Apply the Blue manifest for this application'
           task :apply, :except => { :no_release => true } do
-            current_host = capture("echo $CAPISTRANO:HOST$").strip.gsub('.', '_')
-            run "sudo su - -c 'cd #{latest_release} && RAILS_ROOT=#{latest_release} RAILS_ENV=#{Blue.env} bundle exec shadow_puppet #{latest_release}/config/blue/#{Blue.env}/#{current_host}.rb'"
+            hostname = capture("echo $(hostname)")
+            # current_host = capture("echo $CAPISTRANO:HOST$").strip.gsub('.', '_')
+            run "sudo su - -c 'cd #{latest_release} && RAILS_ROOT=#{latest_release} RAILS_ENV=#{Blue.env} bundle exec shadow_puppet #{latest_release}/config/blue/#{Blue.env}/#{hostname}.rb'"
           end
 
           task :verify_db do
