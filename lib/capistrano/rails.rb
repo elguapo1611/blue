@@ -12,8 +12,8 @@ module Blue
           end
         end
 
-        after 'blue:apply_manifest', 'deploy:migrate'
-        after 'deploy:migrate', 'blue:precompile:assets'
+        # after 'blue:apply_manifest', 'deploy:migrate'
+        # after 'deploy:migrate', 'blue:precompile:assets'
       end
     end
   end

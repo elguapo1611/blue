@@ -7,13 +7,13 @@ module Blue
         namespace :blue do
           namespace :setup do
             desc "Install Ruby 1.9.3"
-            task :ruby do
+            task :ruby, :roles => [:os] do
               version = "ruby-#{Blue.config.ruby.major_version}-p#{Blue.config.ruby.minor_version}"
 
               cmd = [
                 'sudo apt-get install autoconf libyaml-dev -y || true',
                 'cd /tmp',
-                "sudo rm -rf #{version}* || true",
+                "rm -rf #{version}* || true",
                 "wget -q http://ftp.ruby-lang.org/pub/ruby/#{version}.tar.gz",
                 "tar zxvf #{version}.tar.gz",
                 "cd /tmp/#{version}",

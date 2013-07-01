@@ -18,7 +18,8 @@ module Blue
         set :shared_children, %w(system log pids tmp)
 
         Blue::Box.boxes.each do |box|
-          server box.ip, *box.roles, :primary => true # primary is a hack, shouldn't be here
+          server box.ip, *box.roles, :user => Blue.config.user # primary is a hack, shouldn't be here
+          server box.ip, :os, :user => Blue.config.sudoer, :no_release => true
         end
 
         namespace :blue do

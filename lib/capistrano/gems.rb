@@ -7,12 +7,12 @@ module Blue
         namespace :blue do
           namespace :setup do
             desc "Install required gems"
-            task :gems do
-              # sudo "gem install #{Blue::Gems.required_gems.join(' ')} --no-ri --no-rdoc"
+            task :gems, :roles => [:os] do
+              run "sudo gem install #{Blue::Gems.required_gems.join(' ')} --no-ri --no-rdoc"
             end
           end
         end
-        before 'deploy:update', 'blue:setup:gems'
+        # before 'deploy:update', 'blue:setup:gems'
       end
     end
   end

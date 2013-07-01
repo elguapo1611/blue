@@ -2,11 +2,7 @@ module Blue
   module Gems
 
     @@required_gems = [
-      'bundler',
-      'shadow_puppet',
-      'blue',
-      'rake',
-      'builder'
+      'bundler'
     ]
 
     def self.required_gems

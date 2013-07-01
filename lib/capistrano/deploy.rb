@@ -15,9 +15,9 @@ module Blue
           end
         end
 
-        after 'deploy:finalize_update', 'blue:apply_manifest'
-        after 'deploy:migrate', 'blue:verify_db'
-        after "deploy:update", "deploy:cleanup"
+        # after 'deploy:finalize_update', 'blue:apply_manifest'
+        # after 'deploy:migrate', 'blue:verify_db'
+        # after "deploy:update", "deploy:cleanup"
       end
     end
   end
