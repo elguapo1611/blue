@@ -23,9 +23,9 @@ module Blue
     end
 
     def self.load!
-      Dir.glob("#{Blue.rails_root}/config/blue/#{Blue.env}/*.rb").each do |rb|
-        require rb
-      end
+      # Dir.glob("#{Blue.rails_root}/config/blue/#{Blue.env}/*.rb").each do |rb|
+      #   require rb
+      # end
     end
 
     def self.add_role(role)

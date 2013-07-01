@@ -9,6 +9,7 @@ module Blue
     end
 
     def self.included(klass)
+      klass.add_role(:apt)
       klass.class_eval do
         recipe :apt
       end
