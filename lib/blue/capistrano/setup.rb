@@ -24,7 +24,3 @@ if Capistrano::Configuration.instance
   Blue::Setup.load(Capistrano::Configuration.instance)
 end
 
-require 'capistrano/os'
-require 'capistrano/ruby'
-require 'capistrano/gems'
-
