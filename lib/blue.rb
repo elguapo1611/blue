@@ -6,6 +6,7 @@ require 'shadow_puppet'
 
 require 'blue/version'
 require 'blue/deep_merge'
+require 'blue/config'
 
 require 'blue/railtie' if defined?(Rails)
 
@@ -48,7 +49,6 @@ module Blue
 end
 
 if File.exists?(Blue::BLUE_CONFIG)
-  require 'blue/config'
   require 'blue/database_config'
   require 'blue/gems'
 

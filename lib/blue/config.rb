@@ -28,7 +28,6 @@ module Blue
       def config
         @@config
       end
-
     end
 
     def self.verify!
