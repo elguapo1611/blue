@@ -8,6 +8,7 @@ module Blue
 
     def self.inherited(klass)
       Blue::Box.register(klass)
+      klass.add_role(:app)
       klass.add_role(:ruby)
     end
 
