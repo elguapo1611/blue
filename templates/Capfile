@@ -1,3 +1,5 @@
 load 'deploy'
+puts 123
 load 'config/deploy'
+puts 234
 
