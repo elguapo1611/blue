@@ -18,8 +18,7 @@ module Blue
         set :shared_children, %w(system log pids tmp)
 
         Blue::Box.boxes.each do |box|
-          server box.ip, *box.roles, :user => Blue.config.user # primary is a hack, shouldn't be here
-          server box.ip, :os, :user => Blue.config.sudoer, :no_release => true
+          server box.ip, *box.roles
         end
 
         namespace :blue do
@@ -27,7 +26,7 @@ module Blue
             run "echo $(hostname)"
           end
 
-          task :reboot, :roles => :os do
+          task :reboot do
             run "sudo reboot"
           end
 

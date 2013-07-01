@@ -49,10 +49,6 @@ module Blue
       [Blue.config.user, ip].join('@')
     end
 
-    def self.sudoer_ip
-      [Blue.config.sudoer, ip].join('@')
-    end
-
     def self.import(plugin)
       require "blue/#{plugin}"
 

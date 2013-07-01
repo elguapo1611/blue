@@ -1,6 +1,5 @@
 application: APPLICATION_NAME
 repository: REPOSITORY
-sudoer: REMOTE_USERNAME_WITH_SUDOERS_ACCESS
 user: REMOTE_USERNAME
 scm: git
 

@@ -7,7 +7,7 @@ module Blue
         namespace :blue do
           namespace :setup do
             desc "Install Ruby 1.9.3"
-            task :ruby, :roles => [:os] do
+            task :ruby, :roles => [:ruby] do
               version = "ruby-#{Blue.config.ruby.major_version}-p#{Blue.config.ruby.minor_version}"
 
               cmd = [
