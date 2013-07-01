@@ -62,5 +62,3 @@ if File.exists?(Blue::BLUE_CONFIG)
   Blue.load_app_config!
 end
 
-require "capistrano/integration"
-
