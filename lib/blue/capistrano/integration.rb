@@ -30,6 +30,10 @@ module Blue
             run "sudo reboot"
           end
 
+          task :shutdown do
+            run "sudo shutdown -h now"
+          end
+
           desc "Display Blue Configuration"
           task :config do
             require 'pp'
