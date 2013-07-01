@@ -54,19 +54,12 @@ if File.exists?(Blue::BLUE_CONFIG)
   require 'blue/database_config'
   require 'blue/gems'
 
-  require 'capistrano/setup'
-  require 'capistrano/deploy'
-  require 'capistrano/rails'
-
   require 'blue/plugins'
   require 'blue/abstract_manifest'
   require 'blue/box'
   require 'blue/initializer'
 
-  require 'capistrano/local_config'
-
   Blue.load_app_config!
-  Blue::Box.load!
 end
 
 require "capistrano/integration"
