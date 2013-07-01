@@ -66,6 +66,7 @@ if File.exists?(Blue::BLUE_CONFIG)
   require 'capistrano/local_config'
 
   Blue.load_app_config!
+  Blue::Box.load!
 end
 
 require "capistrano/integration"
