@@ -39,6 +39,21 @@ Finally, to verify all your boxes you can run this:
 
     $ cap blue:testing
 
+## Usage
+
+There are two main cap tasks provided/altered by Blue.
+
+'cap deploy' is hooked by Blue in several places, but remains fairly standard.  Deploy code, restart services, migrations, assets, etc...
+
+    $ cap deploy
+
+'cap blue:apply' does most of what 'cap deploy' does, but also maintains system services.
+This includes, installation, setup, configuration, monitoring, etc..
+
+    $ cap blue:apply
+
+Both tasks should, in theory, restart all services gracefully (that is, without incurring downtime)
+
 ## Plugins
 Blue was built with the intention of having plugins sit along side it.
 By itself, Blue doesn't do much.  It will prep your boxes, hook capistrano and clone your repo... but that's about it.
@@ -55,22 +70,6 @@ If you want to run an application, you'll need some plugins.
 ## Testing
 
 I've been using a test app to help build Blue.  It's relatively simple: A web server, two app servers and a db server.  Have a look [here](https://github.com/crankharder/blue-test-app)
-
-
-## Usage
-
-There are two main cap tasks provided/altered by Blue.
-
-'cap deploy' is hooked by Blue in several places, but remains fairly standard.  Deploy code, restart services, migrations, assets, etc...
-
-    $ cap deploy
-
-'cap blue:apply' does most of what 'cap deploy' does, but also maintains system services.
-This includes, installation, setup, configuration, monitoring, etc..
-
-    $ cap blue:apply
-
-Both tasks should, in theory, restart all services gracefully (that is, without incurring downtime)
 
 ## Contributing
 
