@@ -44,7 +44,17 @@ Blue was built with the intention of having plugins sit along side it.
 By itself, Blue doesn't do much.  It will prep your boxes, hook capistrano and clone your repo... but that's about it.
 If you want to run an application, you'll need some plugins.
 
-* [nginx](https://github.com/crankharder/blue-nginx) - An HTTP server.
+* [nginx](https://github.com/crankharder/blue-nginx) - HTTP server.
+* [unicorn](https://github.com/crankharder/blue-unicorn) - App Server
+* [postgresql](https://github.com/crankharder/blue-postgresql) - Database
+* [redis](https://github.com/crankharder/blue-redis) - Key/Value Store
+* [resque](https://github.com/crankharder/blue-resque) - Background Workers
+* [resque_scheduler](https://github.com/crankharder/blue-resque_scheduler) - Cron for Resque
+* [icinga](https://github.com/crankharder/blue-icinga) - Monitoring
+
+## Testing
+
+I've been using a 
 
 ## Usage
 
