@@ -54,7 +54,8 @@ If you want to run an application, you'll need some plugins.
 
 ## Testing
 
-I've been using a 
+I've been using a test app to help build Blue.  It's relatively simple: A web server, two app servers and a db server.  Have a look [here](https://github.com/crankharder/blue-test-app)
+
 
 ## Usage
 
