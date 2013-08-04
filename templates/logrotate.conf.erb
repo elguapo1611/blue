@@ -1,0 +1,16 @@
+<%= logs.join(' ') %> {
+  <% options[:options].each do |o| %>
+  <%= o %>
+  <% end %>
+  <% unless options[:postrotate].nil? %>
+  postrotate
+    <%= options[:postrotate] %>
+  endscript
+  <% end %>
+  <% unless options[:prerotate].nil? %>
+  prerotate
+    <%= options[:prerotate] %>
+  endscript
+  <% end %>
+}
+

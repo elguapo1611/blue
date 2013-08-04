@@ -1,6 +1,6 @@
 application: APPLICATION_NAME
 repository: REPOSITORY
-user: REMOTE_USERNAME
+user: SUDO_USERNAME
 scm: git
 
 keep_releases: 5

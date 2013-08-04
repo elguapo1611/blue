@@ -4,7 +4,7 @@ module Blue
     def self.included(klass)
       klass.class_eval do
         def local_template_dir
-          @local_template_dir ||= Pathname.new(Blue.rails_current + '/app/manifests/templates')
+          @local_template_dir ||= Pathname.new(Blue::Box.rails_current + '/app/manifests/templates')
         end
 
         def local_template(pathname)

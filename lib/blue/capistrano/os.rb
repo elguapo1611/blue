@@ -1,12 +1,5 @@
 module Blue
   class Os
-    PACKAGES = %w(
-      g++ gcc make libc6-dev patch openssl ca-certificates libreadline6 \
-      libreadline6-dev curl zlib1g zlib1g-dev libssl-dev libyaml-dev \
-      libxml2-dev libxslt1-dev autoconf libc6-dev \
-      libgdbm-dev libncurses5-dev automake libtool bison pkg-config libffi-dev\ 
-      git-core
-    )
 
     def self.load(capistrano_config)
       capistrano_config.load do
@@ -14,20 +7,30 @@ module Blue
         namespace :blue do
           namespace :setup do
             desc "Install required gems"
-            task :os do
-
-              parent.upload(Blue.gem_path + "/templates/sources.list", "/tmp/sources.list")
-
-              run "sudo mv /tmp/sources.list /etc/apt/sources.list"
-              run "sudo apt-get update"
-              run "sudo apt-get -y dist-upgrade"
-
-              run "sudo apt-get install -y #{(Blue::Os::PACKAGES + Blue.config.packages).join(' ')}"
-
-              # Capistrano isn't smart enough to set this up correctly
-              path = "/u/apps/#{application}"
-              run "sudo mkdir -p #{path} && sudo chown -R #{user} #{path}"
+            task :packages do
+              blue.packages.bootstrap
             end
+
+            desc "Create blue user"
+            task :user do
+              cmd = [
+                "sudo useradd -m -s /bin/bash blue",
+                "sudo mkdir /home/blue/.ssh",
+                "sudo cp /home/#{Blue.config.user}/.ssh/id_rsa.pub /home/blue/.ssh/authorized_keys",
+                "sudo chown -Rf blue:blue /home/blue/.ssh",
+                "sudo usermod -a -G blue #{Blue.config.user}"
+              ].join(' && ')
+              run "test -d /home/blue || (#{cmd})"
+            end
+
+            desc "Setup privileges on the app directory"
+            task :directory do
+              run "sudo mkdir -p /u/apps/#{application}"
+              run "sudo chown -Rf #{Blue.config.user}:blue /u/apps/#{application}"
+              run "sudo sudo chmod -Rf 770 /u/apps/#{application}"
+            end
+            before 'deploy:setup', 'blue:setup:directory'
+            after 'deploy:update_code', 'blue:setup:directory'
 
             desc "Setup github public key"
             task :github do
@@ -35,8 +38,11 @@ module Blue
               # Oh yea, this is dangerous
               run "ssh -o StrictHostKeyChecking=no git@github.com || true"
             end
+
           end
         end
+
+        after "deploy:update", "deploy:cleanup"
       end
     end
   end

@@ -2,3 +2,7 @@ deb http://archive.ubuntu.com/ubuntu precise main restricted universe
 deb http://archive.ubuntu.com/ubuntu precise-updates main restricted universe
 deb http://security.ubuntu.com/ubuntu precise-security main restricted universe
 
+deb-src http://archive.ubuntu.com/ubuntu precise main restricted universe
+deb-src http://archive.ubuntu.com/ubuntu precise-updates main restricted universe
+deb-src http://security.ubuntu.com/ubuntu precise-security main restricted universe
+

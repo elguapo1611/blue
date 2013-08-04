@@ -2,31 +2,13 @@ module Blue
   module Config
     extend ActiveSupport::Concern
 
-    included do
-      Blue.configure({
-        :user  => 'rails',
-        :group => 'rails',
-        :scm   => 'git',
-        :prod_safe_ip_addresses => [],
-        :ruby  => {
-          :major_version => '1.9.3',
-          :minor_version => '448'
-        }
-      })
-    end
-
     module ClassMethods
       def configure(new_config = {})
-        @@config ||= Hashie::Mash.new
-        @@config.deep_merge!(new_config)
-      end
-
-      def load_app_config!
-        configure(YAML.load(IO.read(BLUE_CONFIG)))
+        config.deep_merge!(new_config)
       end
 
       def config
-        @@config
+        @config ||= Hashie::Mash.new
       end
     end
 

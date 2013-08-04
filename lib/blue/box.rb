@@ -1,5 +1,7 @@
 require 'blue/template'
-require 'active_support/core_ext'
+require 'blue/config'
+require 'blue/plugins'
+require 'blue/roles'
 
 module Blue
   class Box < Blue::AbstractManifest
@@ -7,57 +9,130 @@ module Blue
     include Blue::Template
 
     def self.inherited(klass)
-      Blue::Box.register(klass)
-      klass.add_role(:app)
-      klass.add_role(:ruby)
-    end
+      super # or else
+      register(klass)
+      klass.class_eval do
+        include Blue::Config
+        include Blue::Roles
+        include Blue::Plugins
+        add_role :ruby
 
-    def self.register(klass)
-      boxes << klass
-      true
-    end
+        plugins do
+          database_config
+          sudoers
+          ntpd
+        end
 
-    def self.boxes
-      @@boxes ||= Set.new
-    end
+        include Blue::Packages::Manager
+        include Blue::Packages::Os
 
-    def self.load!
-      Dir.glob("#{Blue.rails_root}/config/blue/#{Blue.env}/*.rb").each do |rb|
-        require rb
+        # import 'plugins/logrotate'
+        # import 'plugins/unattended_upgrades'
       end
     end
 
-    def self.add_role(role)
-      roles << role
-      true
+    def config
+      self.class.config
     end
 
-    def self.roles
-      @roles ||= Set.new
+    def blue_user
+      group 'blue',
+        :ensure => :present
+
+      user 'blue',
+        :ensure  => :present,
+        :home    => "/home/blue",
+        :shell   => "/bin/bash",
+        :gid     => 'blue',
+        :require => group('blue')
+
+      [Blue::Box.log_path, Blue::Box.pids_path].each do |pth|
+        file pth,
+          :owner => Blue.config.user,
+          :group => 'blue',
+          :mode  => '770'
+      end
+    end
+    recipe :blue_user
+
+    module ClassMethods
+      def current!
+        @current = true
+      end
+
+      def current?
+        @current
+      end
+
+      def current
+        boxes.detect(&:current?)
+      end
+
+      def register(klass)
+        boxes << klass
+        true
+      end
+
+      def boxes
+        @@boxes ||= Set.new
+      end
+
+      def load!
+        Dir.glob("#{Blue::Box.rails_root}/config/blue/#{Blue.env}/*.rb").each do |rb|
+          require rb
+        end
+      end
+
+      def hostname
+        self.const_get(:HOSTNAME)
+      end
+
+      def ip
+        self.const_get(:IP_ADDRESS)
+      end
+
+      def user_ip
+        [Blue.config.user, ip].join('@')
+      end
+
+      def migrations!
+        @migrations = true
+      end
+
+      def migrations?
+        @migrations.present?
+      end
+
+      def rails_root
+        @@rails_root ||= `pwd`.strip #File.join(current_release_dir.split('/')[0..3] + ['current'])
+      end
+
+      def rails_current
+        @@rails_current ||= File.join(current_release_dir.split('/')[0..3] + ['current'])
+      end
+
+      def current_release_dir
+        @@current_release_dir ||= `pwd`.strip
+      end
+
+      def shared_path
+        @@shared_path ||= "/u/apps/#{Blue.config.application}/shared/"
+      end
+
+      def log_path
+        @@log_path ||= shared_path + "log/"
+      end
+
+      def pids_path
+        @@pids_path ||= shared_path + "pids/"
+      end
+
+      def gem_path
+        @gem_path ||= Bundler.load.specs.detect{|s| s.name == 'blue' }.try(:full_gem_path)
+      end
     end
 
-    def roles
-      self.class.roles
-    end
-
-    def self.ip
-      self.const_get(:IP_ADDRESS)
-    end
-
-    def self.user_ip
-      [Blue.config.user, ip].join('@')
-    end
-
-    def self.import(plugin)
-      require "blue/#{plugin}"
-
-      module_name = "Blue::#{plugin.to_s.split('/').map(&:titlecase).join('::')}".constantize
-      puts "including #{module_name}"
-      self.send :include, module_name
-    end
+    extend ClassMethods
   end
 end
-
-Blue::Box.import('plugins/ntpd')
-Blue::Box.import('plugins/apt')
 

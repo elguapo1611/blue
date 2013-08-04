@@ -9,7 +9,8 @@ module Blue
 
         set :application, Blue.config.application
         set :repository,  Blue.config.repository
-        set :scm, Blue.config.scm
+        set :branch, Blue.config.branch
+        set :scm, Blue.config.scm || 'git'
         set :user, Blue.config.user
 
         set :keep_releases, Blue.config.keep_releases || 5
@@ -18,12 +19,12 @@ module Blue
         set :shared_children, %w(system log pids tmp)
 
         Blue::Box.boxes.each do |box|
-          server box.ip, *box.roles
+          server box.ip, *(box.roles + [box.migrations? ? :db : nil]).to_a.compact, :primary => box.migrations?
         end
 
         namespace :blue do
           task :testing do
-            run "echo $(hostname)"
+            run "sudo echo $(hostname): $(uptime)"
           end
 
           task :reboot do

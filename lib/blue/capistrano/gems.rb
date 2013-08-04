@@ -12,7 +12,6 @@ module Blue
             end
           end
         end
-        # before 'deploy:update', 'blue:setup:gems'
       end
     end
   end
