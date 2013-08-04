@@ -39,6 +39,13 @@ Finally, to verify all your boxes you can run this:
 
     $ cap blue:testing
 
+## Plugins
+Blue was built with the intention of having plugins sit along side it.
+By itself, Blue doesn't do much.  It will prep your boxes, hook capistrano and clone your repo... but that's about it.
+If you want to run an application, you'll need some plugins.
+
+* [nginx](https://github.com/crankharder/blue-nginx) - An HTTP server.
+
 ## Usage
 
 There are two main cap tasks provided/altered by Blue.
