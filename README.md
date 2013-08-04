@@ -11,7 +11,7 @@ I'm not maintaining gems at the moment since Blue, and its plugins are under rap
 I am however going to tag releases that should be somewhat stable.  So, for the meantime, please reference those in your Gemfile:
 
     group :development, :deployment do
-      gem 'blue', :git => 'git@github.com:crankharder/blue.git'
+      gem 'blue', :git => 'git@github.com:crankharder/blue.git', :tag => 'v0.3'
     end
 
 Run Bundle:
