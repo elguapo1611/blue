@@ -7,7 +7,8 @@ Blue helps you manage your Ruby on Rails deployment.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+I'm not maintaining gems at the moment since Blue, and its plugins are under rapid development.
+I am however going to tag releases that should be somewhat stable.  So, for the meantime, please reference those in your Gemfile:
 
     group :development, :deployment do
       gem 'blue', :git => 'git@github.com:crankharder/blue.git'
@@ -17,9 +18,26 @@ Run Bundle:
 
     $ bundle
 
-Then run the following to move a basic set of configs into place.
+## Setup
 
-    $ rake blue:setup
+Blue provides two rake tasks to help initialize your application and then your boxes:
+
+The first task will copy certain configs into place.
+
+    $ rake blue:setup_app
+
+The second task will do several things:
+* Copies your current user's ssh keys into place on the remote boxes.
+* Adds this remote user to the 'sudo' group
+* Gives NOPASSWD to the 'sudo' group.
+
+You will be asked several times to enter your remote password during this step.
+
+    $ rake blue:setup_boxes
+
+Finally, to verify all your boxes you can run this:
+
+    $ cap blue:testing
 
 ## Usage
 
