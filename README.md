@@ -41,7 +41,18 @@ Finally, to verify all your boxes you can run this:
 
 ## Usage
 
-TODO: Write usage instructions here
+There are two main cap tasks provided/altered by Blue.
+
+'cap deploy' is hooked by Blue in several places, but remains fairly standard.  Deploy code, restart services, migrations, assets, etc...
+
+    $ cap deploy
+
+'cap blue:apply' does most of what 'cap deploy' does, but also maintains system services.
+This includes, installation, setup, configuration, monitoring, etc..
+
+    $ cap blue:apply
+
+Both tasks should, in theory, restart all services gracefully (that is, without incurring downtime)
 
 ## Contributing
 
