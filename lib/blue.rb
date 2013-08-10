@@ -30,6 +30,14 @@ module Blue
     ENV['DEPLOY_ENV']
   end
 
+  def self.single_host?
+    Blue::Box.boxes.count == 1
+  end
+
+  def self.multi_host?
+    !single_host?
+  end
+
   configure(YAML.load(IO.read(CONFIG)).reverse_merge({
     :user  => 'blue',
     :group => 'blue',
@@ -38,6 +46,10 @@ module Blue
     :ruby  => {
       :major_version => '1.9.3',
       :minor_version => '448'
+    },
+    :networking => {
+      :external_interface => 'eth0',
+      :internal_interface => 'eth1'
     }
   }))
 end

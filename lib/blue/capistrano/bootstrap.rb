@@ -14,7 +14,7 @@ module Blue
             blue.setup.github
             blue.setup.directory
             deploy.setup
-            blue.reboot
+            blue.reboot unless ENV['NOREBOOT']
           end
         end
       end

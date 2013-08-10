@@ -36,17 +36,17 @@ module Blue
         end
 
         def push_commands!
-          system %(echo '#{commands.join('\n')}' | ssh #{ip} 'cat > #{Blue::Packages::SETUP_LOCATION}')
+          system %(echo '#{commands.join('\n')}' | ssh #{cap_user_ip} 'cat > #{Blue::Packages::SETUP_LOCATION}')
         end
 
         def push_templates!
           templates.each do |tmpl|
-            system %(scp -q #{tmpl} #{ip}:/tmp/#{tmpl.split('/').last})
+            system %(scp -q #{tmpl} #{cap_user_ip}:/tmp/#{tmpl.split('/').last})
           end
         end
 
         def push_package_list!
-          system %(echo 'sudo apt-get install -y #{packages.join(' ')}' | ssh #{ip} 'cat > #{Blue::Packages::INSTALL_LOCATION}')
+          system %(echo 'sudo apt-get install -y #{packages.join(' ')}' | ssh #{cap_user_ip} 'cat > #{Blue::Packages::INSTALL_LOCATION}')
         end
       end
     end

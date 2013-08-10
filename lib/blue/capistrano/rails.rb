@@ -11,7 +11,7 @@ module Blue
           end
 
           desc "Verifies the environment and connection to the DB"
-          task :verify_db do
+          task :verify_db, :roles => [:resque, :unicorn] do
             run %(sudo su - blue -c "cd #{latest_release} && RAILS_ENV=#{Blue.env} bundle exec rails runner 'ActiveRecord::Base.connection.execute %q!SELECT 1=1!'")
           end
         end

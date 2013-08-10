@@ -3,8 +3,22 @@ module Blue
     include Blue::Plugin
 
     def ntpd
-      package :ntp, :ensure => :latest
-      service :ntp, :ensure => :running, :require => package('ntp'), :pattern => 'ntpd'
+      zone = 'UTC'
+
+      package :ntp,
+        :ensure => :latest
+
+      service :ntp,
+        :ensure  => :running,
+        :require => package('ntp')
+
+      file "/etc/timezone",
+        :content => zone+"\n",
+        :ensure => :present
+
+      file "/etc/localtime",
+        :ensure => "/usr/share/zoneinfo/#{zone}",
+        :notify => service('ntp')
     end
 
     setup do

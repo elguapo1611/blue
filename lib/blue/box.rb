@@ -21,6 +21,7 @@ module Blue
           database_config
           sudoers
           ntpd
+          iptables
         end
 
         include Blue::Packages::Manager
@@ -83,16 +84,41 @@ module Blue
         end
       end
 
-      def hostname
-        self.const_get(:HOSTNAME)
+      def hostname(name = nil)
+        @hostname ||= (name || raise(StandardError, "Thou shalt configure a hostname for #{self}"))
       end
 
-      def ip
-        self.const_get(:IP_ADDRESS)
+      def external_interface
+        Blue.config.networking.external_interface
       end
 
-      def user_ip
-        [Blue.config.user, ip].join('@')
+      def internal_interface
+        if Blue.single_host?
+          'lo'
+        else
+          Blue.config.networking.internal_interface || :eth1
+        end
+      end
+
+      def all_interfaces
+        [external_interface, internal_interface, 'lo'].uniq
+      end
+
+      def external_ip(addr = nil)
+        @external_ip ||= addr || raise(StandardError, "Thou shalt configure an external_ip for #{self}")
+      end
+
+      def internal_ip(addr = nil)
+        @addr ||= addr
+        if @addr.blank? && Blue.multi_host?
+          raise(StandardError, "Thou shalt configure an internal_ip for #{self}")
+        end
+        @addr ||= '127.0.0.1'
+        @addr
+      end
+
+      def cap_user_ip
+        [Blue.config.user, external_ip].join('@')
       end
 
       def migrations!
@@ -129,6 +155,10 @@ module Blue
 
       def gem_path
         @gem_path ||= Bundler.load.specs.detect{|s| s.name == 'blue' }.try(:full_gem_path)
+      end
+
+      def iptables_rules
+        @iptables_rules ||= Set.new
       end
     end
 

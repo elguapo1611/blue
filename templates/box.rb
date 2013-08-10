@@ -8,6 +8,10 @@ require 'blue'
 
 class SomeHostnameCom < Blue::Box
 
+  # hostname change-me
+  # external_ip 123.234.345.456
+  # internal_ip 123.234.345.456 # required if you have more than one hoste
+
   # Blue modules get included like so:
 
   # include Blue::Redis

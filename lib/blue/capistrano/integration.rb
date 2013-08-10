@@ -9,7 +9,7 @@ module Blue
 
         set :application, Blue.config.application
         set :repository,  Blue.config.repository
-        set :branch, Blue.config.branch
+        set :branch, Blue.config.branch || 'master'
         set :scm, Blue.config.scm || 'git'
         set :user, Blue.config.user
 
@@ -19,7 +19,7 @@ module Blue
         set :shared_children, %w(system log pids tmp)
 
         Blue::Box.boxes.each do |box|
-          server box.ip, *(box.roles + [box.migrations? ? :db : nil]).to_a.compact, :primary => box.migrations?
+          server box.cap_user_ip, *(box.roles + [box.migrations? ? :db : nil]).to_a.compact, :primary => box.migrations?
         end
 
         namespace :blue do
@@ -33,12 +33,6 @@ module Blue
 
           task :shutdown do
             run "sudo shutdown -h now"
-          end
-
-          desc "Display Blue Configuration"
-          task :config do
-            require 'pp'
-            pp Blue.config
           end
         end
       end
