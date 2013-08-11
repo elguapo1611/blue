@@ -1,9 +1,11 @@
-# Blue
-
 Blue helps you manage your Ruby on Rails deployment.
 
 * Deploy new code
 * Install/Update/Restart services
+
+## Operating Systems
+
+Currently, we only support Ubuntu 12.04 LTS.
 
 ## Installation
 
