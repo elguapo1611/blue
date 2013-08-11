@@ -37,9 +37,15 @@ You will be asked several times to enter your remote password during this step.
 
     $ rake blue:setup_boxes
 
-Finally, to verify all your boxes you can run this:
+At this point, you should run this, which will verify a few things required to move forward.
 
     $ cap blue:testing
+
+If there are no errors, then you're ready to go ahead and boostrap your boxes.
+
+    $ cap blue:bootstrap
+
+This task will update your boxes, install required system packages and install ruby.
 
 ### Usage
 
