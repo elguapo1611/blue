@@ -1,16 +1,20 @@
-<%= logs.join(' ') %> {
-  <% options[:options].each do |o| %>
+<% Blue::Box.current.rotated_logs.each do |log| %>
+<%= log[:names] %> {
+
+  <% log[:options][:options].each do |o| %>
   <%= o %>
   <% end %>
-  <% unless options[:postrotate].nil? %>
+
+  <% unless log[:options][:postrotate].nil? %>
   postrotate
-    <%= options[:postrotate] %>
+    <%= log[:options][:postrotate] %>
   endscript
   <% end %>
-  <% unless options[:prerotate].nil? %>
-  prerotate
-    <%= options[:prerotate] %>
-  endscript
+
+  <% unless log[:options][:prerotate].nil? %>
+    prerotate
+    <%= log[:options][:prerotate] %>
+    endscript
   <% end %>
 }
-
+<% end %>

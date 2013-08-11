@@ -22,13 +22,12 @@ module Blue
           sudoers
           ntpd
           iptables
+          unattended_upgrades
+          logrotate
         end
 
         include Blue::Packages::Manager
         include Blue::Packages::Os
-
-        # import 'plugins/logrotate'
-        # import 'plugins/unattended_upgrades'
       end
     end
 

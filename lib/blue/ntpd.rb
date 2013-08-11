@@ -22,8 +22,8 @@ module Blue
     end
 
     setup do
-      add_role(:ntpd)
-      recipe :ntpd
+      add_role :ntpd
+      recipe   :ntpd
     end
   end
 end

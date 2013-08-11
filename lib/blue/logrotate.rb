@@ -1,29 +1,48 @@
 module Blue
-  module Plugins
-    module Logrotate
+  module Logrotate
+    include Blue::Plugin
 
-      def logrotate(name, logs, options = {})
-        logs = Array(logs).flatten.uniq.compact
+    def self.default_options
+      [
+        'daily',
+        'missingok',
+        'compress',
+        'delaycompress',
+        'sharedscripts'
+      ]
+    end
 
-        options = options.respond_to?(:to_hash) ? options.to_hash : {}
-        options[:options] ||= [
-          'daily',
-          'missingok',
-          'compress',
-          'delaycompress',
-          'sharedscripts'
-        ]
-
-        safename = name.to_s.gsub(/[^a-zA-Z]/, '')
-
-        file "/etc/logrotate.d/#{safename}.blue.conf",
-          :ensure => :present,
-          :content => template(File.join(File.dirname(__FILE__), '..', '..', '..', 'templates', 'logrotate.conf.erb'), binding),
-          :alias => "logrotate_#{safename}"
-
-        package "logrotate",
-          :ensure  => :installed
+    module ClassMethods
+      def rotated_logs
+        @rotated_logs ||= Set.new
       end
+
+      def rotate_log(paths, options = {})
+        paths = Array(paths).flatten.uniq.compact
+
+        options[:options] ||= Blue::Logrotate.default_options
+
+        rotated_logs << {
+          :names   => paths.join(' '),
+          :options => options
+        }
+      end
+    end
+
+    def logrotate
+      package "logrotate",
+        :ensure => :installed
+
+      file "/etc/logrotate.d/blue.conf",
+        :ensure  => :present,
+        :content => template(File.join(File.dirname(__FILE__), '..', '..', 'templates', 'logrotate.conf.erb'), binding),
+        :require => package('logrotate')
+    end
+
+    setup do
+      recipe :logrotate
+
+      rotate_log Blue::Box.log_path + Blue.env + ".log"
     end
   end
 end
