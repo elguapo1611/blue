@@ -13,8 +13,6 @@ require 'blue/abstract_manifest'
 require 'blue/config'
 require 'blue/box'
 require 'blue/packages'
-require 'blue/packages/manager'
-require 'blue/packages/os'
 
 require 'blue/gems'
 require 'blue/initializer'

@@ -5,7 +5,6 @@ module Blue
     def self.setup!
       Blue::Box.boxes.each do |box|
         box.plugins.each do |plugin|
-          # puts "#{box.name}: Setup: #{plugin}"
           plugin.setup!(box)
         end
       end

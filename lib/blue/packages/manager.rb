@@ -1,53 +1,49 @@
 module Blue
   module Packages
-    module Manager
-      extend ActiveSupport::Concern
+    class Manager
 
-      included do
-        # TODO: Nothing really requires this to be execute before everything else, even though it needs to
-        def install_packages
-          self.class.packages.each do |pkg|
-            package pkg, :ensure => :installed
-          end
-        end
-        recipe :install_packages
+      attr_accessor :klass
+      def initialize(klass)
+        @klass = klass
       end
 
-      module ClassMethods
-        def package_klasses
-          @package_klasses ||= []
-        end
+      def klasses
+        @klasses ||= ::Set.new
+      end
 
-        def packages
-          @packages ||= [
-            package_klasses.map(&:packages),
-            Blue.config.packages
-          ].flatten.compact.uniq.sort
-        end
+      def objects
+        klasses.map{|k| k.new(klass)}
+      end
 
-        def commands
-          package_klasses.map{|pkg| pkg.commands rescue []}.flatten.uniq + [
-            "rm #{Blue::Packages::SETUP_LOCATION}"
-          ]
-        end
+      def packages
+        [
+          objects.map(&:packages),
+          Blue.config.packages
+        ].flatten.compact.uniq.sort
+      end
 
-        def templates
-          package_klasses.map{|pkg| pkg.templates rescue []}.flatten.uniq
-        end
+      def commands
+        objects.map{|obj| obj.commands rescue []}.flatten.uniq + [
+          "rm #{Blue::Packages::SETUP_LOCATION}"
+        ]
+      end
 
-        def push_commands!
-          system %(echo '#{commands.join('\n')}' | ssh #{cap_user_ip} 'cat > #{Blue::Packages::SETUP_LOCATION}')
-        end
+      def templates
+        objects.map{|obj| obj.templates rescue []}.flatten.uniq
+      end
 
-        def push_templates!
-          templates.each do |tmpl|
-            system %(scp -q #{tmpl} #{cap_user_ip}:/tmp/#{tmpl.split('/').last})
-          end
-        end
+      def push_commands!
+        system %(echo '#{commands.join('\n')}' | ssh #{klass.cap_user_ip} 'cat > #{Blue::Packages::SETUP_LOCATION}')
+      end
 
-        def push_package_list!
-          system %(echo 'sudo apt-get install -y #{packages.join(' ')}' | ssh #{cap_user_ip} 'cat > #{Blue::Packages::INSTALL_LOCATION}')
+      def push_templates!
+        templates.each do |tmpl|
+          system %(scp -q #{tmpl} #{klass.cap_user_ip}:/tmp/#{tmpl.split('/').last})
         end
+      end
+
+      def push_package_list!
+        system %(echo 'sudo apt-get install -y #{packages.join(' ')}' | ssh #{klass.cap_user_ip} 'cat > #{Blue::Packages::INSTALL_LOCATION}')
       end
     end
   end

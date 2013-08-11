@@ -1,9 +1,8 @@
 module Blue
   module Packages
-    module Os
-      include Blue::Packages
+    class Os < Set
 
-      def self.packages
+      def packages
         %w(
           g++ gcc make libc6-dev patch openssl ca-certificates libreadline6
           libreadline6-dev curl zlib1g zlib1g-dev libssl-dev libyaml-dev
@@ -13,11 +12,11 @@ module Blue
         )
       end
 
-      def self.templates
+      def templates
         Blue::Box.gem_path + "/templates/sources.list"
       end
 
-      def self.commands
+      def commands
         "sudo mv /tmp/sources.list /etc/apt/sources.list"
       end
     end

@@ -15,6 +15,7 @@ module Blue
         include Blue::Config
         include Blue::Roles
         include Blue::Plugins
+        include Blue::Packages
         add_role :ruby
 
         plugins do
@@ -25,9 +26,6 @@ module Blue
           unattended_upgrades
           logrotate
         end
-
-        include Blue::Packages::Manager
-        include Blue::Packages::Os
       end
     end
 
@@ -158,6 +156,10 @@ module Blue
 
       def iptables_rules
         @iptables_rules ||= Set.new
+      end
+
+      def package_manager
+        @package_manager ||= Blue::Packages::Manager.new(self)
       end
     end
 

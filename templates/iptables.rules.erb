@@ -22,16 +22,21 @@
 -A OUTPUT -o <%= Blue::Box.current.external_interface %> -p icmp --icmp-type echo-reply -j ACCEPT
 -A INPUT -i  <%= Blue::Box.current.external_interface %> -p icmp --icmp-type echo-request -j ACCEPT
 
-# Allow ALL SSH
+# Allow ALL SSH<% if Blue.config.safe_ips %>
+<% Blue.config.safe_ips.each do |ip| %>
+-A INPUT -i <%= Blue::Box.current.external_interface %> -s <%= ip %> -p tcp --dport 22 -j ACCEPT
+<% end %>
+<% else %>
 -A INPUT -i <%= Blue::Box.current.external_interface %> -p tcp --dport 22 -j ACCEPT
+<% end %>
 
 # Allow outbound 80/443
 -A OUTPUT -o <%= Blue::Box.current.external_interface %> -p tcp --dport 80 -j ACCEPT
 -A OUTPUT -o <%= Blue::Box.current.external_interface %> -p tcp --dport 443 -j ACCEPT
 
 # Allow resolver requests
--A INPUT -i  <%= Blue::Box.current.external_interface %> -p tcp  --sport 53 -s 192.168.1.1 -j ACCEPT
--A INPUT -i  <%= Blue::Box.current.external_interface %> -p udp  --sport 53 -s 192.168.1.1 -j ACCEPT
+-A INPUT -i  <%= Blue::Box.current.external_interface %> -p tcp --sport 53 -s 192.168.1.1 -j ACCEPT
+-A INPUT -i  <%= Blue::Box.current.external_interface %> -p udp --sport 53 -s 192.168.1.1 -j ACCEPT
 -A OUTPUT -o <%= Blue::Box.current.external_interface %> -p tcp --dport 53 -d 192.168.1.1 -j ACCEPT
 -A OUTPUT -o <%= Blue::Box.current.external_interface %> -p udp --dport 53 -d 192.168.1.1 -j ACCEPT
 
