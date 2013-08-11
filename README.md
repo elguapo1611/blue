@@ -3,11 +3,11 @@ Blue helps you manage your Ruby on Rails deployment.
 * Deploy new code
 * Install/Update/Restart services
 
-## Operating Systems
+### Operating Systems
 
 Currently, we only support Ubuntu 12.04 LTS.
 
-## Installation
+### Installation
 
 I'm not maintaining gems at the moment since Blue, and its plugins are under rapid development.
 I am however going to tag releases that should be somewhat stable.  So, for the meantime, please reference those in your Gemfile:
@@ -20,7 +20,7 @@ Run Bundle:
 
     $ bundle
 
-## Setup
+### Setup
 
 Blue provides two rake tasks to help initialize your application and then your boxes:
 
@@ -41,7 +41,7 @@ Finally, to verify all your boxes you can run this:
 
     $ cap blue:testing
 
-## Usage
+### Usage
 
 There are two main cap tasks provided/altered by Blue.
 
@@ -56,7 +56,7 @@ This includes, installation, setup, configuration, monitoring, etc..
 
 Both tasks should, in theory, restart all services gracefully (that is, without incurring downtime)
 
-## Plugins
+### Plugins
 Blue was built with the intention of having plugins sit along side it.
 By itself, Blue doesn't do much.  It will prep your boxes, hook capistrano and clone your repo... but that's about it.
 If you want to run an application, you'll need some plugins.
@@ -69,13 +69,13 @@ If you want to run an application, you'll need some plugins.
 * [resque_scheduler](https://github.com/crankharder/blue-resque_scheduler) - Cron for Resque
 * [icinga](https://github.com/crankharder/blue-icinga) - Monitoring
 
-## Testing
+### Testing
 
 Uh, Blue has no tests... Think it should? Great! Want to write some?
 
 I've been using a test app to help build Blue.  It's relatively simple: A web server, two app servers and a db server.  Have a look [here](https://github.com/crankharder/blue-test-app)
 
-## Contributing
+### Contributing
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
