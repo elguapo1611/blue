@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'hashie'
   spec.add_dependency 'shadow_puppet'
   spec.add_dependency 'capistrano'
-
+  spec.add_dependency 'puppet'
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
 end
